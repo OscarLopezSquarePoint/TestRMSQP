@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="custLoginRepoModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+  <EntityContainer Name="custLoginRepoModelContainer" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Application" EntityType="custLoginRepoModel.Application" />
+    <EntitySet Name="Customer" EntityType="custLoginRepoModel.Customer" />
+    <EntitySet Name="GeneralSettings" EntityType="custLoginRepoModel.GeneralSettings" />
+    <EntitySet Name="Login" EntityType="custLoginRepoModel.Login" />
+    <AssociationSet Name="FK_ApplicationLogin" Association="custLoginRepoModel.FK_ApplicationLogin">
+      <End Role="Application" EntitySet="Application" />
+      <End Role="Login" EntitySet="Login" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CustomerLogin" Association="custLoginRepoModel.FK_CustomerLogin">
+      <End Role="Customer" EntitySet="Customer" />
+      <End Role="Login" EntitySet="Login" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Application">
+    <Key>
+      <PropertyRef Name="appId" />
+    </Key>
+    <Property Name="appId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="appName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="appUid" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Login" Relationship="custLoginRepoModel.FK_ApplicationLogin" FromRole="Application" ToRole="Login" />
+  </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="custId" />
+    </Key>
+    <Property Name="custId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="custName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="custCif" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Login" Relationship="custLoginRepoModel.FK_CustomerLogin" FromRole="Customer" ToRole="Login" />
+  </EntityType>
+  <EntityType Name="GeneralSettings">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="regProvider" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Login">
+    <Key>
+      <PropertyRef Name="loginId" />
+    </Key>
+    <Property Name="loginId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="login1" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="loginName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="appId" Type="Int32" Nullable="false" />
+    <Property Name="custId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Application" Relationship="custLoginRepoModel.FK_ApplicationLogin" FromRole="Login" ToRole="Application" />
+    <NavigationProperty Name="Customer" Relationship="custLoginRepoModel.FK_CustomerLogin" FromRole="Login" ToRole="Customer" />
+  </EntityType>
+  <Association Name="FK_ApplicationLogin">
+    <End Type="custLoginRepoModel.Application" Role="Application" Multiplicity="1" />
+    <End Type="custLoginRepoModel.Login" Role="Login" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Application">
+        <PropertyRef Name="appId" />
+      </Principal>
+      <Dependent Role="Login">
+        <PropertyRef Name="appId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CustomerLogin">
+    <End Type="custLoginRepoModel.Customer" Role="Customer" Multiplicity="1" />
+    <End Type="custLoginRepoModel.Login" Role="Login" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="custId" />
+      </Principal>
+      <Dependent Role="Login">
+        <PropertyRef Name="custId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

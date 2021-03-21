@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs" Space="C-S">
+  <Alias Key="Model" Value="custLoginRepoModel" />
+  <Alias Key="Target" Value="custLoginRepoModel.Store" />
+  <EntityContainerMapping CdmEntityContainer="custLoginRepoModelContainer" StorageEntityContainer="custLoginRepoModelStoreContainer">
+    <EntitySetMapping Name="Application">
+      <EntityTypeMapping TypeName="custLoginRepoModel.Application">
+        <MappingFragment StoreEntitySet="Application">
+          <ScalarProperty Name="appUid" ColumnName="appUid" />
+          <ScalarProperty Name="appName" ColumnName="appName" />
+          <ScalarProperty Name="appId" ColumnName="appId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Customer">
+      <EntityTypeMapping TypeName="custLoginRepoModel.Customer">
+        <MappingFragment StoreEntitySet="Customer">
+          <ScalarProperty Name="custCif" ColumnName="custCif" />
+          <ScalarProperty Name="custName" ColumnName="custName" />
+          <ScalarProperty Name="custId" ColumnName="custId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GeneralSettings">
+      <EntityTypeMapping TypeName="custLoginRepoModel.GeneralSettings">
+        <MappingFragment StoreEntitySet="GeneralSettings">
+          <ScalarProperty Name="regProvider" ColumnName="regProvider" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Login">
+      <EntityTypeMapping TypeName="custLoginRepoModel.Login">
+        <MappingFragment StoreEntitySet="Login">
+          <ScalarProperty Name="custId" ColumnName="custId" />
+          <ScalarProperty Name="appId" ColumnName="appId" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="loginName" ColumnName="loginName" />
+          <ScalarProperty Name="login1" ColumnName="login" />
+          <ScalarProperty Name="loginId" ColumnName="loginId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
