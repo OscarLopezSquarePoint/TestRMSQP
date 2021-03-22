@@ -42,7 +42,7 @@ namespace TestRMSQP.Controllers
                 password = requestJson["password"].ToString();
                 if (string.IsNullOrEmpty(password)) return Ok(new { error = true, errorMessage = "Falta valor para parámetro obligatorio password.", returnData = "" });
 
-                //Guardamos aplicación
+                //Guardamos login
                 string message = "";
                 new TestRMSQP.Models.LoginManager().SetLogin(appId, custId, login, loginName, password, ref message);
                 if (string.IsNullOrEmpty(message))
@@ -56,14 +56,25 @@ namespace TestRMSQP.Controllers
             }
         }
 
-        public IHttpActionResult Delete([FromBody] Int32 id)
+        public IHttpActionResult Delete(string login)
         {
 
-            if (id < 1)
-                return Ok(new { error = true, errorMessage = "Identificador incorrecto", returnData = "" });
+            try
+            {
+                if (string.IsNullOrEmpty(login)) return Ok(new { error = true, errorMessage = "Falta valor para parámetro obligatorio login.", returnData = "" });
 
-            //OJO// Temporal para comprobar primera llamada
-            return Ok(new { error = true, errorMessage = "En desarrollo", returnData = "" });
+                //Borramos login
+                string message = "";
+                new TestRMSQP.Models.LoginManager().DeleteLogin(login, ref message);
+                if (string.IsNullOrEmpty(message))
+                    return Ok(new { error = "false", errorMessage = "", returnData = "" });
+                else
+                    return Ok(new { error = "true", errorMessage = message, returnData = "" });
+            }
+            catch (Exception ex)
+            {
+                return Ok(new { error = "true", errorMessage = ex.Message, returnData = "" });
+            }
         }
     }
 }
